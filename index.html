@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f2e7">
+  <meta name="description" content="Ոսկե հարսանիքի հրավիրատոմս — համատեղ կյանքի 50 տարի">
+  <title>Ոսկե Հարսանիք · 50 տարի միասին</title>
+
+  <!-- Fonts: Noto Serif/Sans Armenian fully support Armenian glyphs -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Armenian:wght@300;400;500;600;700&family=Noto+Sans+Armenian:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="is-locked">
+
+  <!-- ============================================================
+       SVG ORNAMENT LIBRARY (reused across the page)
+       ============================================================ -->
+  <svg class="svg-defs" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="orn-divider" viewBox="0 0 240 24">
+        <path d="M0 12h74" stroke="currentColor" stroke-width="1" fill="none" opacity=".55"/>
+        <path d="M166 12h74" stroke="currentColor" stroke-width="1" fill="none" opacity=".55"/>
+        <path d="M120 3c-7 5-11 6-18 6-6 0-10-2-10-5 0-2 2-4 5-4 5 0 9 5 9 12 0 6-4 10-9 10-3 0-5-2-5-4 0-3 4-5 10-5 7 0 11 1 18 6"
+              stroke="currentColor" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+        <path d="M120 3c7 5 11 6 18 6 6 0 10-2 10-5 0-2-2-4-5-4-5 0-9 5-9 12 0 6 4 10 9 10 3 0 5-2 5-4 0-3-4-5-10-5-7 0-11 1-18 6"
+              stroke="currentColor" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+        <circle cx="120" cy="12" r="2.2" fill="currentColor"/>
+      </symbol>
+
+      <symbol id="orn-sprig" viewBox="0 0 64 64">
+        <path d="M32 60V14" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        <path d="M32 46c-9 0-15-5-16-13 9-1 15 3 16 13zM32 46c9 0 15-5 16-13-9-1-15 3-16 13z" fill="currentColor" opacity=".35"/>
+        <path d="M32 32c-8 0-13-5-14-12 8-1 13 3 14 12zM32 32c8 0 13-5 14-12-8-1-13 3-14 12z" fill="currentColor" opacity=".5"/>
+        <path d="M32 18c-5 0-9-4-10-9 6-1 10 3 10 9zM32 18c5 0 9-4 10-9-6-1-10 3-10 9z" fill="currentColor" opacity=".7"/>
+        <circle cx="32" cy="9" r="3" fill="currentColor"/>
+      </symbol>
+
+      <symbol id="orn-rings" viewBox="0 0 72 48">
+        <circle cx="27" cy="26" r="16" stroke="currentColor" stroke-width="1.6" fill="none"/>
+        <circle cx="45" cy="26" r="16" stroke="currentColor" stroke-width="1.6" fill="none"/>
+        <path d="M36 4l3 6 3-6-3-3z" fill="currentColor"/>
+      </symbol>
+
+      <symbol id="orn-frame" viewBox="0 0 100 100">
+        <path d="M2 22V2h20M78 2h20v20M98 78v20H78M22 98H2V78" stroke="currentColor" stroke-width="1.4" fill="none"/>
+        <path d="M10 30V10h20M70 10h20v20M90 70v20H70M30 90H10V70" stroke="currentColor" stroke-width=".7" fill="none" opacity=".6"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- ============================================================
+       OPENING ANIMATION — envelope
+       ============================================================ -->
+  <div class="opening" id="opening">
+    <div class="opening__glow" aria-hidden="true"></div>
+
+    <div class="envelope" id="envelope">
+      <div class="envelope__body">
+        <div class="envelope__card">
+          <svg class="envelope__card-frame" aria-hidden="true"><use href="#orn-frame"></use></svg>
+          <p class="envelope__card-eyebrow">1976 — 2026</p>
+          <!-- REPLACE: couple's names -->
+          <p class="envelope__card-names">Արամ&nbsp;&amp;&nbsp;Անահիտ</p>
+          <p class="envelope__card-note">Ոսկե հարսանիք</p>
+        </div>
+        <div class="envelope__back"></div>
+        <div class="envelope__front"></div>
+        <div class="envelope__flap"></div>
+        <div class="envelope__seal" aria-hidden="true"><span>50</span></div>
+      </div>
+    </div>
+
+    <div class="opening__text">
+      <p class="opening__eyebrow">Հրավիրատոմս</p>
+      <h1 class="opening__title">Դուք հրավիրված եք</h1>
+      <p class="opening__sub">Համատեղ կյանքի 50 տարվա տոնակատարությանը</p>
+      <button class="btn btn--gold opening__btn" id="openBtn" type="button">Բացել հրավերը</button>
+    </div>
+  </div>
+
+  <!-- Floating golden particles -->
+  <canvas class="particles" id="particles" aria-hidden="true"></canvas>
+
+  <main>
+
+    <!-- ==========================================================
+         HERO
+         ========================================================== -->
+    <section class="hero" id="hero">
+      <div class="hero__bg" aria-hidden="true"></div>
+
+      <div class="hero__inner">
+        <p class="hero__eyebrow reveal" data-delay="1">Ոսկե Հարսանիք</p>
+
+        <svg class="ornament ornament--divider reveal" data-delay="2" aria-hidden="true"><use href="#orn-divider"></use></svg>
+
+        <!-- REPLACE: couple's names -->
+        <h1 class="hero__names reveal" data-delay="3">
+          <span class="hero__name">Արամ</span>
+          <span class="hero__amp" aria-hidden="true">&amp;</span>
+          <span class="hero__name">Անահիտ</span>
+        </h1>
+
+        <p class="hero__sub reveal" data-delay="4">Համատեղ կյանքի 50 տարի</p>
+
+        <div class="hero__years reveal" data-delay="5">
+          <span>1976</span>
+          <svg class="ornament ornament--rings" aria-hidden="true"><use href="#orn-rings"></use></svg>
+          <span>2026</span>
+        </div>
+
+        <!-- REPLACE: date, time and venue -->
+        <p class="hero__meta reveal" data-delay="6">
+          <span>12 հոկտեմբերի 2026 թ.</span>
+          <span class="hero__meta-sep" aria-hidden="true">·</span>
+          <span>ժամը 18:00</span>
+          <span class="hero__meta-sep" aria-hidden="true">·</span>
+          <span>ք. Երևան</span>
+        </p>
+      </div>
+
+      <a class="hero__scroll" href="#invitation" aria-label="Ոլորել ներքև">
+        <span>Ոլորեք ներքև</span>
+        <span class="hero__scroll-line" aria-hidden="true"></span>
+      </a>
+    </section>
+
+    <!-- ==========================================================
+         INVITATION MESSAGE + DETAILS + COUNTDOWN
+         ========================================================== -->
+    <section class="section section--paper" id="invitation">
+      <div class="container container--narrow">
+
+        <header class="section__head reveal">
+          <svg class="ornament ornament--sprig" aria-hidden="true"><use href="#orn-sprig"></use></svg>
+          <p class="section__eyebrow">Հրավեր</p>
+          <h2 class="section__title">Սիրելի՛ հարազատներ և ընկերներ</h2>
+        </header>
+
+        <div class="invite-card reveal">
+          <p class="invite-card__lead">
+            Հիսուն տարի առաջ մենք միմյանց խոստացանք սեր, հավատարմություն և միասնություն։
+          </p>
+          <p>
+            Այդ խոստումը մենք պահեցինք ամեն օր՝ ուրախության և հոգսի, ծիծաղի և լռության մեջ։
+            Այսօր, շրջապատված մեր զավակներով, թոռներով և ամենաթանկ մարդկանցով, ուզում ենք
+            նույն խոստումը կրկնել՝ արդեն ոսկե փայլով։
+          </p>
+          <p>
+            Մեծ ուրախությամբ հրավիրում ենք Ձեզ կիսելու մեզ հետ մեր ոսկե հարսանիքի տոնական օրը։
+            Ձեր ներկայությունը մեզ համար ամենաթանկ նվերն է։
+          </p>
+          <p class="invite-card__sign">Սիրով՝ Արամ և Անահիտ</p>
+        </div>
+
+        <svg class="ornament ornament--divider ornament--center reveal" aria-hidden="true"><use href="#orn-divider"></use></svg>
+
+        <!-- Event details -->
+        <ul class="details">
+          <li class="detail reveal" data-delay="1">
+            <span class="detail__icon" aria-hidden="true">✧</span>
+            <h3 class="detail__title">Ամսաթիվ</h3>
+            <!-- REPLACE: date -->
+            <p class="detail__main">12 հոկտեմբերի, 2026 թ.</p>
+            <p class="detail__sub">Կիրակի</p>
+          </li>
+
+          <li class="detail reveal" data-delay="2">
+            <span class="detail__icon" aria-hidden="true">✧</span>
+            <h3 class="detail__title">Ժամ</h3>
+            <!-- REPLACE: time -->
+            <p class="detail__main">18:00</p>
+            <p class="detail__sub">Հյուրերի դիմավորումը՝ 17:30-ից</p>
+          </li>
+
+          <li class="detail reveal" data-delay="3">
+            <span class="detail__icon" aria-hidden="true">✧</span>
+            <h3 class="detail__title">Վայր</h3>
+            <!-- REPLACE: venue name, address and map link -->
+            <p class="detail__main">Ռեստորանային համալիր «Ոսկե Այգի»</p>
+            <p class="detail__sub">ք. Երևան, Բաղրամյան պող. 12</p>
+            <a class="detail__link" href="https://maps.google.com" target="_blank" rel="noopener">Բացել քարտեզում</a>
+          </li>
+
+          <li class="detail reveal" data-delay="4">
+            <span class="detail__icon" aria-hidden="true">✧</span>
+            <h3 class="detail__title">Հագուստի ոճ</h3>
+            <p class="detail__main">Տոնական երեկոյան</p>
+            <p class="detail__sub">Ոսկեգույն և բեժ երանգները ողջունելի են</p>
+          </li>
+        </ul>
+
+        <!-- Countdown -->
+        <div class="countdown reveal" id="countdown">
+          <p class="countdown__label">Մինչև տոնակատարությունը մնացել է</p>
+          <ul class="countdown__list">
+            <li><span class="countdown__num" id="cdDays">00</span><span class="countdown__unit">օր</span></li>
+            <li><span class="countdown__num" id="cdHours">00</span><span class="countdown__unit">ժամ</span></li>
+            <li><span class="countdown__num" id="cdMinutes">00</span><span class="countdown__unit">րոպե</span></li>
+            <li><span class="countdown__num" id="cdSeconds">00</span><span class="countdown__unit">վայրկյան</span></li>
+          </ul>
+          <p class="countdown__done" id="cdDone">Այսօր մեր տոնն է. սպասում ենք Ձեզ։</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         PORTRAIT / PULL QUOTE (parallax)
+         ========================================================== -->
+    <section class="quote" id="quote">
+      <div class="quote__bg" data-parallax="0.18" aria-hidden="true"></div>
+      <div class="quote__veil" aria-hidden="true"></div>
+      <blockquote class="quote__inner reveal">
+        <svg class="ornament ornament--sprig" aria-hidden="true"><use href="#orn-sprig"></use></svg>
+        <p class="quote__text">
+          «Սերը ժամանակով չի չափվում. այն չափվում է միասին ապրած պահերով»։
+        </p>
+        <footer class="quote__cite">50 տարի · 18&nbsp;262 օր · մեկ սիրտ</footer>
+      </blockquote>
+    </section>
+
+    <!-- ==========================================================
+         STORY / TIMELINE
+         ========================================================== -->
+    <section class="section section--cream" id="story">
+      <div class="container">
+
+        <header class="section__head reveal">
+          <svg class="ornament ornament--sprig" aria-hidden="true"><use href="#orn-sprig"></use></svg>
+          <p class="section__eyebrow">Հիշողություններ</p>
+          <h2 class="section__title">Մեր պատմությունը</h2>
+          <p class="section__lead">
+            Հինգ տասնամյակ՝ մեկ ընդհանուր ճանապարհ։ Ահա այն պահերը, որոնք դարձան մեր կյանքի ոսկե էջերը։
+          </p>
+        </header>
+
+        <ol class="timeline">
+
+          <li class="timeline__item reveal">
+            <div class="timeline__media">
+              <figure class="photo-frame">
+                <!-- REPLACE: images/story-1.jpg -->
+                <img class="photo" src="images/story-1.jpg" alt="Առաջին հանդիպումը" loading="lazy"
+                     onload="this.classList.add('is-loaded')"
+                     onerror="this.remove()">
+                <div class="photo-ph" aria-hidden="true">
+                  <svg class="photo-ph__orn"><use href="#orn-frame"></use></svg>
+                  <span class="photo-ph__label">Լուսանկար 1</span>
+                  <span class="photo-ph__path">images/story-1.jpg</span>
+                </div>
+              </figure>
+            </div>
+            <div class="timeline__body">
+              <span class="timeline__year">1974</span>
+              <h3 class="timeline__title">Առաջին հանդիպումը</h3>
+              <p>
+                Աշնանային մի երեկո, ընկերների հարսանիքին։ Մեկ պար, մեկ զրույց՝ և հասկացանք,
+                որ այս պատմությունը երկար է լինելու։
+              </p>
+            </div>
+          </li>
+
+          <li class="timeline__item reveal">
+            <div class="timeline__media">
+              <figure class="photo-frame">
+                <!-- REPLACE: images/story-2.jpg -->
+                <img class="photo" src="images/story-2.jpg" alt="Հարսանիքի օրը" loading="lazy"
+                     onload="this.classList.add('is-loaded')"
+                     onerror="this.remove()">
+                <div class="photo-ph" aria-hidden="true">
+                  <svg class="photo-ph__orn"><use href="#orn-frame"></use></svg>
+                  <span class="photo-ph__label">Լուսանկար 2</span>
+                  <span class="photo-ph__path">images/story-2.jpg</span>
+                </div>
+              </figure>
+            </div>
+            <div class="timeline__body">
+              <span class="timeline__year">1976</span>
+              <h3 class="timeline__title">Մեր հարսանիքի օրը</h3>
+              <p>
+                Համեստ սեղան, մեծ սեր և հարազատների ջերմ ծափահարություններ։
+                Այդ օրվանից սկսվեց մեր ընդհանուր ճանապարհը։
+              </p>
+            </div>
+          </li>
+
+          <li class="timeline__item reveal">
+            <div class="timeline__media">
+              <figure class="photo-frame">
+                <!-- REPLACE: images/story-3.jpg -->
+                <img class="photo" src="images/story-3.jpg" alt="Ընտանիքի ծնունդը" loading="lazy"
+                     onload="this.classList.add('is-loaded')"
+                     onerror="this.remove()">
+                <div class="photo-ph" aria-hidden="true">
+                  <svg class="photo-ph__orn"><use href="#orn-frame"></use></svg>
+                  <span class="photo-ph__label">Լուսանկար 3</span>
+                  <span class="photo-ph__path">images/story-3.jpg</span>
+                </div>
+              </figure>
+            </div>
+            <div class="timeline__body">
+              <span class="timeline__year">1979</span>
+              <h3 class="timeline__title">Ընտանիքի ծնունդը</h3>
+              <p>
+                Տունը լցվեց մանկական ծիծաղով։ Հասկացանք, որ երջանկությունը
+                փոքր, ամենօրյա պահերի մեջ է։
+              </p>
+            </div>
+          </li>
+
+          <li class="timeline__item reveal">
+            <div class="timeline__media">
+              <figure class="photo-frame">
+                <!-- REPLACE: images/story-4.jpg -->
+                <img class="photo" src="images/story-4.jpg" alt="Թոռների ժամանակը" loading="lazy"
+                     onload="this.classList.add('is-loaded')"
+                     onerror="this.remove()">
+                <div class="photo-ph" aria-hidden="true">
+                  <svg class="photo-ph__orn"><use href="#orn-frame"></use></svg>
+                  <span class="photo-ph__label">Լուսանկար 4</span>
+                  <span class="photo-ph__path">images/story-4.jpg</span>
+                </div>
+              </figure>
+            </div>
+            <div class="timeline__body">
+              <span class="timeline__year">2005</span>
+              <h3 class="timeline__title">Թոռների ժամանակը</h3>
+              <p>
+                Նոր անուններ, նոր ձայներ և նոր տոներ։ Մեր սեղանը դարձավ ավելի երկար,
+                իսկ սիրտը՝ ավելի լիքը։
+              </p>
+            </div>
+          </li>
+
+          <li class="timeline__item reveal">
+            <div class="timeline__media">
+              <figure class="photo-frame">
+                <!-- REPLACE: images/story-5.jpg -->
+                <img class="photo" src="images/story-5.jpg" alt="Ոսկե հարսանիք" loading="lazy"
+                     onload="this.classList.add('is-loaded')"
+                     onerror="this.remove()">
+                <div class="photo-ph" aria-hidden="true">
+                  <svg class="photo-ph__orn"><use href="#orn-frame"></use></svg>
+                  <span class="photo-ph__label">Լուսանկար 5</span>
+                  <span class="photo-ph__path">images/story-5.jpg</span>
+                </div>
+              </figure>
+            </div>
+            <div class="timeline__body">
+              <span class="timeline__year">2026</span>
+              <h3 class="timeline__title">Ոսկե հարսանիք</h3>
+              <p>
+                Հիսուն տարի միասին։ Այսօր ուզում ենք այս ոսկե օրը կիսել
+                այն մարդկանց հետ, ովքեր եղել են մեր կողքին։
+              </p>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         NUMBERS
+         ========================================================== -->
+    <section class="stats" aria-label="Թվերով">
+      <div class="container">
+        <ul class="stats__list">
+          <li class="stat reveal" data-delay="1">
+            <span class="stat__num" data-count="50">0</span>
+            <span class="stat__label">տարի միասին</span>
+          </li>
+          <li class="stat reveal" data-delay="2">
+            <span class="stat__num" data-count="3">0</span>
+            <span class="stat__label">զավակ</span>
+          </li>
+          <li class="stat reveal" data-delay="3">
+            <span class="stat__num" data-count="7">0</span>
+            <span class="stat__label">թոռ</span>
+          </li>
+          <li class="stat reveal" data-delay="4">
+            <span class="stat__num" data-count="18262">0</span>
+            <span class="stat__label">ընդհանուր օր</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         GALLERY
+         ========================================================== -->
+    <section class="section section--paper" id="gallery">
+      <div class="container">
+
+        <header class="section__head reveal">
+          <svg class="ornament ornament--sprig" aria-hidden="true"><use href="#orn-sprig"></use></svg>
+          <p class="section__eyebrow">Պատկերասրահ</p>
+          <h2 class="section__title">Ոսկե հիշողություններ</h2>
+          <p class="section__lead">Մի քանի պահ մեր ընդհանուր ալբոմից։</p>
+        </header>
+
+        <div class="gallery">
+
+          <figure class="photo-frame gallery__item gallery__item--tall reveal" data-delay="1">
+            <!-- REPLACE: images/gallery-1.jpg -->
+            <img class="photo" src="images/gallery-1.jpg" alt="Երիտասարդ տարիներ" loading="lazy"
+                 onload="this.classList.add('is-loaded')" onerror="this.remove()">
+            <div class="photo-ph" aria-hidden="true">
+              <svg class="photo-ph__orn"><use href="#orn-frame"></use></svg>
+              <span class="photo-ph__label">Լուսանկար 6</span>
+              <span class="photo-ph__path">images/gallery-1.jpg</span>
+            </div>
+            <figcaption class="photo-frame__cap">Երիտասարդ տարիներ</figcaption>
+          </figure>
+
+          <figure class="photo-frame gallery__item reveal" data-delay="2">
+            <!-- REPLACE: images/gallery-2.jpg -->
+            <img class="photo" src="images/gallery-2.jpg" alt="Հարսանեկան օրը" loading="lazy"
+                 onload="this.classList.add('is-loaded')" onerror="this.remove()">
+            <div class="photo-ph" aria-hidden="true">
+              <svg class="photo-ph__orn"><use href="#orn-frame"></use></svg>
+              <span class="photo-ph__label">Լուսանկար 7</span>
+              <span class="photo-ph__path">images/gallery-2.jpg</span>
+            </div>
+            <figcaption class="photo-frame__cap">Հարսանեկան օրը</figcaption>
+          </figure>
+
+          <figure class="photo-frame gallery__item reveal" data-delay="3">
+            <!-- REPLACE: images/gallery-3.jpg -->
+            <img class="photo" src="images/gallery-3.jpg" alt="Ընտանեկան լուսանկար" loading="lazy"
+                 onload="this.classList.add('is-loaded')" onerror="this.remove()">
+            <div class="photo-ph" aria-hidden="true">
+              <svg class="photo-ph__orn"><use href="#orn-frame"></use></svg>
+              <span class="photo-ph__label">Լուսանկար 8</span>
+              <span class="photo-ph__path">images/gallery-3.jpg</span>
+            </div>
+            <figcaption class="photo-frame__cap">Ընտանեկան լուսանկար</figcaption>
+          </figure>
+
+          <figure class="photo-frame gallery__item gallery__item--wide reveal" data-delay="1">
+            <!-- REPLACE: images/gallery-4.jpg -->
+            <img class="photo" src="images/gallery-4.jpg" alt="Ամառային հիշողություններ" loading="lazy"
+                 onload="this.classList.add('is-loaded')" onerror="this.remove()">
+            <div class="photo-ph" aria-hidden="true">
+              <svg class="photo-ph__orn"><use href="#orn-frame"></use></svg>
+              <span class="photo-ph__label">Լուսանկար 9</span>
+              <span class="photo-ph__path">images/gallery-4.jpg</span>
+            </div>
+            <figcaption class="photo-frame__cap">Ամառային հիշողություններ</figcaption>
+          </figure>
+
+          <figure class="photo-frame gallery__item reveal" data-delay="2">
+            <!-- REPLACE: images/gallery-5.jpg -->
+            <img class="photo" src="images/gallery-5.jpg" alt="Թոռների հետ" loading="lazy"
+                 onload="this.classList.add('is-loaded')" onerror="this.remove()">
+            <div class="photo-ph" aria-hidden="true">
+              <svg class="photo-ph__orn"><use href="#orn-frame"></use></svg>
+              <span class="photo-ph__label">Լուսանկար 10</span>
+              <span class="photo-ph__path">images/gallery-5.jpg</span>
+            </div>
+            <figcaption class="photo-frame__cap">Թոռների հետ</figcaption>
+          </figure>
+
+          <figure class="photo-frame gallery__item gallery__item--wide reveal" data-delay="3">
+            <!-- REPLACE: images/gallery-6.jpg -->
+            <img class="photo" src="images/gallery-6.jpg" alt="Այսօր՝ միասին" loading="lazy"
+                 onload="this.classList.add('is-loaded')" onerror="this.remove()">
+            <div class="photo-ph" aria-hidden="true">
+              <svg class="photo-ph__orn"><use href="#orn-frame"></use></svg>
+              <span class="photo-ph__label">Լուսանկար 11</span>
+              <span class="photo-ph__path">images/gallery-6.jpg</span>
+            </div>
+            <figcaption class="photo-frame__cap">Այսօր՝ միասին</figcaption>
+          </figure>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer">
+    <div class="container container--narrow">
+      <svg class="ornament ornament--divider ornament--center" aria-hidden="true"><use href="#orn-divider"></use></svg>
+      <p class="footer__lead">Սիրով սպասում ենք Ձեզ</p>
+      <!-- REPLACE: couple's names -->
+      <p class="footer__names">Արամ&nbsp;&amp;&nbsp;Անահիտ</p>
+      <p class="footer__years">1976 — 2026</p>
+      <p class="footer__note">Շնորհակալ ենք, որ եղել եք մեր կյանքի ոսկե տարիների մի մասը։</p>
+      <p class="footer__fine">Ոսկե հարսանիքի հրավիրատոմս · 50 տարի միասին</p>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lightbox__close" id="lightboxClose" type="button" aria-label="Փակել">×</button>
+    <figure class="lightbox__fig">
+      <img id="lightboxImg" src="" alt="">
+      <figcaption id="lightboxCap"></figcaption>
+    </figure>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
