@@ -9,7 +9,7 @@ hraviratoms/
 ├── index.html                 ← all page content & text
 ├── css/style.css              ← the entire design system
 ├── js/script.js               ← animations (CONFIG block at the top)
-└── images/                    ← put the real photos here (see images/README.md)
+└── images/                    ← the photographs (see images/README.md)
 ```
 
 Open `index.html` in a browser and it works immediately — no server required.
@@ -23,36 +23,34 @@ Every spot that needs your real details is marked in the source with a
 
 | What | Where |
 |---|---|
-| **Couple's names** (`Արամ & Անահիտ`) | `index.html` — envelope card, hero, footer (3 places) |
+| **Couple's names** (`Սուրիկ & Արևիկ`) | `index.html` — envelope card, hero, invitation signature, footer |
 | **Years** (`1976 — 2026`) | envelope card, hero, footer |
 | **Date / time / venue / dress code** | `index.html` → hero `.hero__meta` and the four `.detail` cards |
 | **Google Maps link** | `.detail__link` `href` in the Վայր card |
-| **Story / timeline text and years** | `#story` section — five `.timeline__item` blocks |
 | **Numbers** (50 years, 3 children, 7 grandchildren, 18 262 days) | `.stat` items — edit both the `data-count` attribute and the Armenian label |
-| **Gallery captions** | `<figcaption class="photo-frame__cap">` |
+| **Gallery captions** | `<figcaption class="photo-frame__cap">` — one per photo |
 | **Countdown target date** | `js/script.js` → `CONFIG.EVENT_DATE` |
 | **Page title / browser tab** | `<title>` in `index.html` |
 
 > ⚠️ `CONFIG.EVENT_DATE` uses a **zero-based month**:
-> `new Date(2026, 9, 12, 18, 0)` = **12 October 2026, 18:00**.
-> 0 = January, 9 = October, 11 = December.
+> `new Date(2026, 8, 24, 18, 0)` = **24 September 2026, 18:00**.
+> 0 = January, 8 = September, 11 = December.
+> Change the date in three places: `CONFIG.EVENT_DATE`, the hero line, and the
+> Ամսաթիվ card (including its weekday, currently `Հինգշաբթի`).
 
 ---
 
 ## 2. Photos
 
-Drop the real photographs into `images/` with the file names listed in
-[`images/README.md`](images/README.md) — `story-1.jpg … story-5.jpg`,
-`gallery-1.jpg … gallery-6.jpg`, `quote.jpg`.
+The nine real photographs in `images/` are all in use — see
+[`images/README.md`](images/README.md) for which photo sits where and how to
+swap or add more.
 
-Nothing else needs changing: each `<img>` already points at its final path, and
-a decorative gold placeholder (with the expected file name printed on it) is
-shown for any photo that is not there yet. Once a photo loads it fades in,
-gains a hover zoom, and becomes clickable (opens in a lightbox).
-
-To use different names or formats, edit the `src` attribute of the relevant
-`<img>` in `index.html`. `quote.jpg` is the one exception — it is a CSS
-background, set in `css/style.css`, section **9. QUOTE (PARALLAX)**.
+The gallery is a banded grid (four portraits, then three landscapes, then two
+large landscapes) so every row is homogeneous and the block ends flush. Photos
+fade in as they load, zoom gently on hover, and open in a lightbox when
+clicked. `Photo_9.jpeg` does double duty as the parallax band behind the quote,
+set in `css/style.css`, section **9. QUOTE (PARALLAX)**.
 
 ---
 
@@ -83,8 +81,8 @@ same Wi-Fi. (`ipconfig getifaddr en0` prints the IP.)
 ## 4. What's inside
 
 **Page sections** — envelope opening animation → hero → invitation message,
-event details and countdown → parallax quote band → story timeline →
-statistics → photo gallery → footer.
+event details and countdown → parallax quote band → statistics → photo gallery
+→ footer.
 
 **Experience**
 * Envelope opening animation with a wax seal — the invitation card lifts out of the envelope

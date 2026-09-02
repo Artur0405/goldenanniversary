@@ -12,10 +12,10 @@ const CONFIG = {
   /* ------------------------------------------------------------------
      1) EVENT DATE & TIME (used by the countdown)
      Format: new Date(year, monthIndex, day, hour, minute)
-     ⚠️ monthIndex is ZERO-BASED: 0 = January ... 9 = October ... 11 = December
-     Below: 12 October 2026, 18:00
+     ⚠️ monthIndex is ZERO-BASED: 0 = January ... 8 = September ... 11 = December
+     Below: 24 September 2026, 18:00
   ------------------------------------------------------------------ */
-  EVENT_DATE: new Date(2026, 9, 12, 18, 0, 0),
+  EVENT_DATE: new Date(2026, 8, 24, 18, 0, 0),
 
   /* 2) Number of floating golden particles (0 disables them) */
   PARTICLE_COUNT: 34
@@ -310,7 +310,7 @@ function initLightbox() {
     const frame = e.target.closest('.photo-frame');
     if (!frame) return;
     const photo = frame.querySelector('.photo.is-loaded');
-    if (!photo) return;                       // placeholder → nothing to zoom
+    if (!photo) return;                       // not loaded yet → nothing to zoom
     const caption = frame.querySelector('.photo-frame__cap');
     open(photo.currentSrc || photo.src, photo.alt, caption ? caption.textContent : photo.alt);
   });
@@ -344,15 +344,18 @@ function initAnchors() {
 }
 
 /* ==========================================================================
-   9. PHOTO PLACEHOLDER SAFETY NET
-   Images that failed before this script ran are removed here so the
-   elegant placeholder underneath stays visible.
+   9. PHOTO SAFETY NET
+   Images that already failed before this script ran are handled here: the
+   whole tile is dropped so no empty frame is left behind.
    ========================================================================== */
 function initPhotos() {
   $$('.photo-frame .photo').forEach(img => {
-    if (img.complete) {
-      if (img.naturalWidth === 0) img.remove();
-      else img.classList.add('is-loaded');
+    if (!img.complete) return;
+    if (img.naturalWidth === 0) {
+      const fig = img.closest('figure');
+      fig ? fig.remove() : img.remove();
+    } else {
+      img.classList.add('is-loaded');
     }
   });
 }

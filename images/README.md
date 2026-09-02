@@ -1,30 +1,52 @@
 # images/
 
-Drop the real photographs here using **exactly these file names**. Any file that
-is missing simply shows an elegant gold placeholder instead — nothing breaks.
+The real photographs live here. Nine are currently in use, and **every one of
+them appears on the site**.
 
-| File name          | Where it appears                    | Suggested size / crop        |
-|--------------------|-------------------------------------|------------------------------|
-| `story-1.jpg`      | Timeline · 1974 «Առաջին հանդիպումը»  | 1200 × 900 (4:3, landscape)  |
-| `story-2.jpg`      | Timeline · 1976 «Մեր հարսանիքի օրը»  | 1200 × 900 (4:3)             |
-| `story-3.jpg`      | Timeline · 1979 «Ընտանիքի ծնունդը»   | 1200 × 900 (4:3)             |
-| `story-4.jpg`      | Timeline · 2005 «Թոռների ժամանակը»   | 1200 × 900 (4:3)             |
-| `story-5.jpg`      | Timeline · 2026 «Ոսկե հարսանիք»      | 1200 × 900 (4:3)             |
-| `gallery-1.jpg`    | Gallery · tall tile (left column)    | 900 × 1400 (portrait)        |
-| `gallery-2.jpg`    | Gallery                              | 1200 × 900                   |
-| `gallery-3.jpg`    | Gallery                              | 1200 × 900                   |
-| `gallery-4.jpg`    | Gallery · wide tile (2 columns)      | 1800 × 900 (panoramic)       |
-| `gallery-5.jpg`    | Gallery                              | 1200 × 900                   |
-| `gallery-6.jpg`    | Gallery                              | 1200 × 900                   |
-| `quote.jpg`        | Full-width parallax band behind the quote | 2000 × 1200, works best with a calm, low-contrast photo (a dark gold veil is laid over it) |
+| File | Where it appears | Orientation |
+|---|---|---|
+| `Photo_1.jpeg` | Gallery · portrait band, 1st | portrait |
+| `Photo_2.jpeg` | Gallery · portrait band, 2nd | portrait |
+| `Photo_3.jpeg` | Gallery · portrait band, 3rd | portrait |
+| `Photo_7.webp` | Gallery · portrait band, 4th | portrait |
+| `Photo_4.jpeg` | Gallery · landscape band, 1st | landscape |
+| `Photo_5.jpeg` | Gallery · landscape band, 2nd | landscape |
+| `Photo_6.jpeg` | Gallery · landscape band, 3rd | landscape |
+| `Photo_8.jpeg` | Gallery · large band, left | landscape |
+| `Photo_9.jpeg` | Gallery · large band, right **and** the full-width parallax band behind the quote | landscape |
+
+## Layout logic
+
+The gallery is a banded grid, so every row is homogeneous and the block always
+ends flush — no ragged edge:
+
+* **Band A** — four portrait tiles (`2 / 3`)
+* **Band B** — three landscape tiles (`3 / 2`)
+* **Band C** — two large landscape tiles (`3 / 2`)
+
+On tablets it drops to two columns (the last photo spans the full width to
+close the grid), and on phones to a single column.
+
+## Adding or swapping photos
+
+* **To swap a photo:** replace the file, keeping the same name. Nothing else
+  changes. If the new photo has a different orientation, move its `<figure>`
+  into the matching band in `index.html` so the row stays homogeneous.
+* **To add photos:** copy an existing `<figure>` in the `.gallery` block of
+  `index.html` and give it the right class —
+  `gallery__item--portrait`, `gallery__item--land`, or `gallery__item--land-lg`.
+  Keep band A at a multiple of 4, band B at a multiple of 3, and band C at a
+  multiple of 2, so each row fills completely.
+* Set `width` and `height` on the `<img>` to the file's real pixel size — it
+  reserves space and prevents layout shift while the photo loads.
+* The photo behind the quote is a CSS background, set in `css/style.css`,
+  section **9. QUOTE (PARALLAX)**.
+* Captions are the `<figcaption class="photo-frame__cap">` next to each photo.
 
 ## Tips
 
-* **JPG, ~200–500 KB each.** Large photos slow the page down badly on phones —
-  resize before uploading (long edge ≈ 1600 px is plenty).
-* Faces should sit near the **centre** of the frame: tiles are cropped with
-  `object-fit: cover`, so the edges may be trimmed on narrow screens.
-* Prefer `.jpg`. If you use another extension (`.png`, `.jpeg`, `.webp`), update
-  the `src` attributes in `index.html` — and, for `quote.jpg`, the
-  `background-image` URL in `css/style.css` (section 10).
-* Captions live in `index.html` next to each photo (`<figcaption class="photo-frame__cap">`).
+* Keep files at roughly **200–500 KB** each; long edge ≈ 1600 px is plenty.
+  `Photo_7.webp` is the heaviest at 564 KB and could be compressed further.
+* Tiles crop with `object-fit: cover`, so keep faces near the centre of frame.
+* A photo whose file is missing removes its own tile automatically rather than
+  leaving an empty gap.
