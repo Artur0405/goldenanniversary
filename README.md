@@ -25,15 +25,15 @@ Every spot that needs your real details is marked in the source with a
 |---|---|
 | **Couple's names** (`Սուրիկ & Արևիկ`) | `index.html` — envelope card, hero, invitation signature, footer |
 | **Years** (`1976 — 2026`) | envelope card, hero, footer |
-| **Date / time / venue / dress code** | `index.html` → hero `.hero__meta` and the four `.detail` cards |
-| **Google Maps link** | `.detail__link` `href` in the Վայր card |
+| **Date / time / venue** | `index.html` → hero `.hero__meta` and the three `.detail` cards |
+| **Map link** (Yandex Maps) | `.detail__link` `href` in the Վայր card |
 | **Numbers** (50 years, 3 children, 7 grandchildren, 18 262 days) | `.stat` items — edit both the `data-count` attribute and the Armenian label |
 | **Gallery captions** | `<figcaption class="photo-frame__cap">` — one per photo |
 | **Countdown target date** | `js/script.js` → `CONFIG.EVENT_DATE` |
 | **Page title / browser tab** | `<title>` in `index.html` |
 
 > ⚠️ `CONFIG.EVENT_DATE` uses a **zero-based month**:
-> `new Date(2026, 8, 24, 18, 0)` = **24 September 2026, 18:00**.
+> `new Date(2026, 8, 24, 17, 30)` = **24 September 2026, 17:30**.
 > 0 = January, 8 = September, 11 = December.
 > Change the date in three places: `CONFIG.EVENT_DATE`, the hero line, and the
 > Ամսաթիվ card (including its weekday, currently `Հինգշաբթի`).

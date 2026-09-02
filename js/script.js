@@ -13,9 +13,9 @@ const CONFIG = {
      1) EVENT DATE & TIME (used by the countdown)
      Format: new Date(year, monthIndex, day, hour, minute)
      ⚠️ monthIndex is ZERO-BASED: 0 = January ... 8 = September ... 11 = December
-     Below: 24 September 2026, 18:00
+     Below: 24 September 2026, 17:30
   ------------------------------------------------------------------ */
-  EVENT_DATE: new Date(2026, 8, 24, 18, 0, 0),
+  EVENT_DATE: new Date(2026, 8, 24, 17, 30, 0),
 
   /* 2) Number of floating golden particles (0 disables them) */
   PARTICLE_COUNT: 34

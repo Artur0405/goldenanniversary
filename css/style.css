@@ -591,7 +591,7 @@ img { max-width: 100%; display: block; }
   margin: clamp(2.4rem, 6vw, 3.6rem) 0 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.15rem;
 }
 .detail {
@@ -943,6 +943,10 @@ img { max-width: 100%; display: block; }
 /* ============================ 15. RESPONSIVE ============================= */
 @media (max-width: 980px) {
   .gallery { gap: .9rem; }
+}
+
+@media (max-width: 720px) {
+  .details { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 860px) {
