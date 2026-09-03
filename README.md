@@ -28,7 +28,6 @@ Every spot that needs your real details is marked in the source with a
 | **Date / time / venue** | `index.html` → hero `.hero__meta` and the three `.detail` cards |
 | **Map link** (Yandex Maps) | `.detail__link` `href` in the Վայր card |
 | **Numbers** (50 years, 3 children, 7 grandchildren, 18 262 days) | `.stat` items — edit both the `data-count` attribute and the Armenian label |
-| **Gallery captions** | `<figcaption class="photo-frame__cap">` — one per photo |
 | **Countdown target date** | `js/script.js` → `CONFIG.EVENT_DATE` |
 | **Page title / browser tab** | `<title>` in `index.html` |
 
@@ -42,15 +41,16 @@ Every spot that needs your real details is marked in the source with a
 
 ## 2. Photos
 
-The nine real photographs in `images/` are all in use — see
+The eight photographs in `images/` are all in use — see
 [`images/README.md`](images/README.md) for which photo sits where and how to
 swap or add more.
 
-The gallery is a banded grid (four portraits, then three landscapes, then two
-large landscapes) so every row is homogeneous and the block ends flush. Photos
-fade in as they load, zoom gently on hover, and open in a lightbox when
-clicked. `Photo_9.jpeg` does double duty as the parallax band behind the quote,
-set in `css/style.css`, section **9. QUOTE (PARALLAX)**.
+The gallery is a banded grid (four portraits, then two rows of two large
+landscapes) so every row is homogeneous and the block ends flush. Photos carry
+no captions or text overlays. They fade in as they load, zoom gently on hover,
+and open in a lightbox when clicked. `Photo_5.jpeg` does double duty as the
+parallax band behind the quote, set in `css/style.css`, section
+**9. QUOTE (PARALLAX)**.
 
 ---
 

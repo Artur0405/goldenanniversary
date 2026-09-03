@@ -474,43 +474,30 @@ img { max-width: 100%; display: block; }
   letter-spacing: .08em;
   margin-bottom: 2.4rem;
 }
-.hero__meta-sep { color: var(--gold); }
 
 .hero__scroll {
   position: absolute;
-  bottom: 2rem;
+  bottom: 2.2rem;
   left: 50%;
   translate: -50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: .7rem;
-  font-size: .64rem;
-  letter-spacing: .3em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  color: var(--gold-deep);
   z-index: 2;
   opacity: 0;
   animation: fadeUp 1.4s var(--ease) 2.6s forwards;
 }
-.hero__scroll-line {
-  width: 1px; height: 52px;
-  background: linear-gradient(to bottom, var(--gold), transparent);
-  position: relative;
-  overflow: hidden;
+.hero__scroll-icon {
+  width: 27px;
+  height: 27px;
+  animation: chevronDrift 2.6s ease-in-out infinite;
 }
-.hero__scroll-line::after {
-  content: "";
-  position: absolute;
-  top: -50%; left: 0;
-  width: 100%; height: 50%;
-  background: var(--gold-deep);
-  animation: scrollDot 2.4s ease-in-out infinite;
-}
-@keyframes scrollDot {
-  0%   { top: -55%; opacity: 0; }
-  25%  { opacity: 1; }
-  100% { top: 105%; opacity: 0; }
+.hero__scroll:hover .hero__scroll-icon { animation-play-state: paused; opacity: 1; }
+@keyframes chevronDrift {
+  0%, 100% { transform: translateY(-4px); opacity: .5; }
+  50%      { transform: translateY(5px);  opacity: 1; }
 }
 
 /* ============================ 7. SECTIONS ================================ */
@@ -701,7 +688,7 @@ img { max-width: 100%; display: block; }
   inset: -12% 0;
   background-image:
     linear-gradient(135deg, rgba(120,92,32,.9), rgba(60,46,28,.85)),
-    url("../images/Photo_9.jpeg");
+    url("../images/Photo_5.jpeg");
   background-size: cover;
   background-position: center;
   will-change: transform;
@@ -800,34 +787,14 @@ img { max-width: 100%; display: block; }
 .photo-frame:hover .photo.is-loaded { transform: scale(1.04); }
 .photo-frame:has(.photo.is-loaded) { cursor: zoom-in; }
 
-.photo-frame__cap {
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  z-index: 3;
-  padding: 2.4rem 1rem .95rem;
-  font-size: .82rem;
-  line-height: 1.5;
-  letter-spacing: .05em;
-  color: #fffaf0;
-  text-align: center;
-  background: linear-gradient(to top, rgba(48,36,18,.78), transparent);
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity .5s var(--ease), transform .5s var(--ease);
-}
-.photo-frame:hover .photo-frame__cap,
-.photo-frame:focus-within .photo-frame__cap { opacity: 1; transform: none; }
-
-/* An editorial mosaic: a band of four portraits, then landscapes in
-   decreasing count / increasing size. Every row is homogeneous, so the
-   grid always ends flush — no ragged bottom edge. */
+/* An editorial mosaic: a band of four portraits, then two rows of two large
+   landscapes. Every row is homogeneous, so the grid always ends flush. */
 .gallery {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 1.1rem;
 }
 .gallery__item--portrait { grid-column: span 3; aspect-ratio: 2 / 3; }
-.gallery__item--land     { grid-column: span 4; aspect-ratio: 3 / 2; }
 .gallery__item--land-lg  { grid-column: span 6; aspect-ratio: 3 / 2; }
 
 /* ============================ 12. FOOTER ================================= */
@@ -882,6 +849,8 @@ img { max-width: 100%; display: block; }
   inset: 0;
   z-index: 150;
   display: grid;
+  /* `display: grid` outranks the UA rule for [hidden], so the overlay would
+     otherwise stay in the layout — invisible, but swallowing every click. */
   place-items: center;
   padding: 4rem 1.25rem;
   background: rgba(28, 21, 10, .93);
@@ -890,6 +859,7 @@ img { max-width: 100%; display: block; }
   opacity: 0;
   transition: opacity .45s var(--ease);
 }
+.lightbox[hidden] { display: none; }
 .lightbox.is-open { opacity: 1; }
 .lightbox__fig { margin: 0; text-align: center; max-height: 100%; }
 .lightbox__fig img {
@@ -902,13 +872,6 @@ img { max-width: 100%; display: block; }
   transition: transform .5s var(--ease);
 }
 .lightbox.is-open .lightbox__fig img { transform: scale(1); }
-.lightbox__fig figcaption {
-  margin-top: 1.1rem;
-  color: var(--gold-light);
-  font-size: .8rem;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-}
 .lightbox__close {
   position: absolute;
   top: 1.1rem; right: 1.4rem;
@@ -953,10 +916,7 @@ img { max-width: 100%; display: block; }
   /* Gallery → 2 columns */
   .gallery { grid-template-columns: repeat(2, 1fr); }
   .gallery__item--portrait,
-  .gallery__item--land,
   .gallery__item--land-lg { grid-column: span 1; }
-  /* odd item out closes the grid across the full width */
-  .gallery__item:last-child { grid-column: span 2; }
 
   .stats__list { grid-template-columns: repeat(2, 1fr); gap: 2rem 1rem; }
 }
@@ -981,18 +941,9 @@ img { max-width: 100%; display: block; }
 
   .gallery { grid-template-columns: 1fr; }
   .gallery__item--portrait,
-  .gallery__item--land,
-  .gallery__item--land-lg,
-  .gallery__item:last-child { grid-column: span 1; }
-
-  /* Captions always visible on touch screens */
-  .photo-frame__cap { opacity: 1; transform: none; }
+  .gallery__item--land-lg { grid-column: span 1; }
 
   .lightbox { padding: 3.5rem .75rem; }
-}
-
-@media (hover: none) {
-  .photo-frame__cap { opacity: 1; transform: none; }
 }
 
 /* ============================ 16. REDUCED MOTION / PRINT ================= */

@@ -282,17 +282,15 @@ function initParticles() {
 function initLightbox() {
   const box   = $('#lightbox');
   const img   = $('#lightboxImg');
-  const cap   = $('#lightboxCap');
   const close = $('#lightboxClose');
   if (!box || !img) return;
 
   let lastFocused = null;
 
-  const open = (src, alt, caption) => {
+  const open = (src, alt) => {
     lastFocused = document.activeElement;
     img.src = src;
     img.alt = alt || '';
-    cap.textContent = caption || '';
     box.hidden = false;
     document.body.classList.add('is-locked');
     window.requestAnimationFrame(() => box.classList.add('is-open'));
@@ -311,8 +309,7 @@ function initLightbox() {
     if (!frame) return;
     const photo = frame.querySelector('.photo.is-loaded');
     if (!photo) return;                       // not loaded yet → nothing to zoom
-    const caption = frame.querySelector('.photo-frame__cap');
-    open(photo.currentSrc || photo.src, photo.alt, caption ? caption.textContent : photo.alt);
+    open(photo.currentSrc || photo.src, photo.alt);
   });
 
   close.addEventListener('click', hide);
