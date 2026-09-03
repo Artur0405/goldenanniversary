@@ -54,7 +54,34 @@ parallax band behind the quote, set in `css/style.css`, section
 
 ---
 
-## 3. Deploying the site
+## 3. Cache busting
+
+`index.html` loads its stylesheet and script with a version parameter:
+
+```html
+<link rel="stylesheet" href="css/style.css?v=2">
+<script src="js/script.js?v=2"></script>
+```
+
+Browsers cache `style.css` and `script.js` aggressively — especially iOS
+Safari, and GitHub Pages sends a 10-minute `max-age` — so a returning guest can
+otherwise sit on an old copy long after you deploy.
+
+**Whenever you edit `css/style.css` or `js/script.js`, bump the number in both
+places** (`?v=2` → `?v=3`). Keep the two in sync; a single number for both is
+simpler than tracking them separately. Changing it makes the URL new, so every
+browser fetches the file fresh.
+
+You do not need to bump it for changes to `index.html` itself — the HTML is the
+document being requested, so edits to it show up on the next load.
+
+Photos are not versioned: they are only ever added or removed, never edited in
+place under the same name. If you do replace a photo while keeping its
+filename, either rename it or give it a `?v=` parameter too.
+
+---
+
+## 4. Deploying the site
 
 Any static host works — the site is just files.
 
@@ -78,7 +105,7 @@ same Wi-Fi. (`ipconfig getifaddr en0` prints the IP.)
 
 ---
 
-## 4. What's inside
+## 5. What's inside
 
 **Page sections** — envelope opening animation → hero → invitation message,
 event details and countdown → parallax quote band → statistics → photo gallery

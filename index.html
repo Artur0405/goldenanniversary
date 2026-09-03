@@ -12,7 +12,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Armenian:wght@300;400;500;600;700&family=Noto+Sans+Armenian:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/style.css">
+  <!-- Cache busting: bump ?v=N in BOTH this line and the script tag at the
+       bottom of the page whenever style.css or script.js changes, so returning
+       guests are never served a stale cached copy. -->
+  <link rel="stylesheet" href="css/style.css?v=2">
 </head>
 <body class="is-locked">
 
@@ -345,6 +348,7 @@
     </figure>
   </div>
 
-  <script src="js/script.js"></script>
+  <!-- Cache busting: keep ?v=N in sync with the stylesheet link in <head>. -->
+  <script src="js/script.js?v=2"></script>
 </body>
 </html>
